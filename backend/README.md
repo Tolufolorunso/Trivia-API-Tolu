@@ -73,6 +73,192 @@ You will need to provide detailed documentation of your API endpoints including 
 
 ### Documentation Example
 
+### Get Categories Using HTTP GET Method
+
+`Get '/categories'`
+
+- Fetch a distionary of categories
+
+```
+- Response is
+- Status code: 200 Ok
+
+{
+    "categories": {
+        "1": "Science",
+        "2": "Art",
+        "3": "Geography",
+        "4": "History",
+        "5": "Entertainment",
+        "6": "Sports"
+    },
+    "status": true
+}
+
+```
+
+### Get Questions Using HTTP GET Method
+
+`GET '/questions?page=<int:page_number>'`
+
+- Get all questions
+- Returned questions is 10
+- Can accept request Arguments: page number
+
+```
+- Response is
+- Status code: 200 Ok
+
+{
+    "categories": {
+        "1": "Science",
+        "2": "Art",
+        "3": "Geography",
+        "4": "History",
+        "5": "Entertainment",
+        "6": "Sports"
+    },
+    "questions": [
+        {
+            "answer": "Maya Angelou",
+            "category": 4,
+            "difficulty": 2,
+            "id": 5,
+            "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
+        },
+        {
+            "answer": "Muhammad Ali",
+            "category": 4,
+            "difficulty": 1,
+            "id": 9,
+            "question": "What boxer's original name is Cassius Clay?"
+        },
+        {
+            "answer": "Apollo 13",
+            "category": 5,
+            "difficulty": 4,
+            "id": 2,
+            "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
+        }
+        ...
+    ],
+    "status": true,
+    "total_questions": 10
+}
+
+```
+
+### Delete question Using HTTP DELETE Method
+
+`DELETE '/questions/<question_id>'`
+
+- Delete question using it's ID.
+
+```
+- Response is
+- Status code: 204 Ok
+
+No Content
+```
+
+### Post question Using HTTP GET Method
+
+`POST '/questions'`
+
+- Create question using HTTP POST method
+
+```
+- Request body is {
+    "question": "What is javascipt?",
+    "answer": "its a programming language",
+    "category": "Science",
+    "difficulty": 1
+}
+- Response is
+- Status code: 201 Ok
+
+{
+    "status": true,
+    "message": 'Question added successfully'
+}
+
+### Get question by categories Using HTTP GET Method
+
+`Get ' '/categories/<category_id>/questions''`
+
+- GET all questions for specific category
+
+```
+
+- Response is
+- Status code: 200 Ok
+
+{
+"currentCategory": null,
+"questions": [
+{
+"answer": "Muhammad Ali",
+"category": 4,
+"difficulty": 1,
+"id": 9,
+"question": "What boxer's original name is Cassius Clay?"
+},
+{
+"answer": "George Washington Carver",
+"category": 4,
+"difficulty": 2,
+"id": 12,
+"question": "Who invented Peanut Butter?"
+},
+{
+"answer": "Scarab",
+"category": 4,
+"difficulty": 4,
+"id": 23,
+"question": "Which dung beetle was worshipped by the ancient Egyptians?"
+}
+],
+"status": true,
+"totalQuestions": 3
+}
+
+```
+
+### Post quizzes Using HTTP DELETE Method
+
+`Post '/quizzes'`
+
+- Get random question.
+- Request body is {
+    "previous_questions": [],
+    "quiz_category": {
+        "id": "1",
+        "type": "Science"
+    }
+}
+
+```
+
+- Response is
+- Status code: 200 Ok
+
+{
+"status": True,
+"question": {
+"answer": "What is javascipt?",
+"category": 4,
+"difficulty": 2,
+"id": 5,
+"question": "Is a programming language?"
+},
+}
+
+````
+
+
+
+
+
 `GET '/api/v1.0/categories'`
 
 - Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
@@ -88,7 +274,7 @@ You will need to provide detailed documentation of your API endpoints including 
   "5": "Entertainment",
   "6": "Sports"
 }
-```
+````
 
 ## Testing
 
