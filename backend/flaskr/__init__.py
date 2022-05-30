@@ -1,13 +1,12 @@
-
-from dis import dis
 import os
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import random
-
 from models import setup_db, Question, Category
 from paginate import paginate
+from dotenv import load_dotenv
+load_dotenv('../.env')
 
 QUESTIONS_PER_PAGE = 10
 
@@ -176,7 +175,7 @@ def create_app(test_config=None):
             questions = Question.query.filter(
                 Question.category == str(category_id)).all()
             questions = paginate(questions, QUESTIONS_PER_PAGE)
-            if len(questions) is 0:
+            if len(questions) == 0:
                 abort(404)
         except:
             abort(422)
@@ -218,6 +217,7 @@ def create_app(test_config=None):
         def generate_question():
             return questions[random.randrange(0, len(questions))].format()
 
+        total_questions = len(questions)
         question = generate_question()
 
         def check_for_prev_question(num):
@@ -229,6 +229,11 @@ def create_app(test_config=None):
 
         while check_for_prev_question(question['id']):
             question = generate_question()
+
+            if (len(previous_questions) == total_questions):
+                return jsonify({
+                    'status': True
+                })
 
         return jsonify({
             "status": True,
